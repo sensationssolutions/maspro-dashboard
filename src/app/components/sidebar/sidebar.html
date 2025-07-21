@@ -1,0 +1,154 @@
+<!-- Mobile menu toggle button -->
+<button class="btn d-lg-none" (click)="toggleSidebar()" style="font-size: 24px;">
+  ☰
+</button>
+
+
+<div class="startbar d-print-none">
+  <!-- Start brand -->
+  <div class="brand">
+    <a routerLink="/home" class="logo">
+      <span>
+
+      </span>
+      <span>
+       <h1 routerLink='/home' style="color: #0d6efd;">MASPRO</h1>
+       <img src="assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark">
+     </span>
+   </a>
+ </div>
+
+ <!-- Sidebar menu -->
+ <div class="startbar-menu">
+  <div class="startbar-collapse" id="startbarCollapse" data-simplebar>
+    <ul class="navbar-nav mb-auto w-100">
+      <li class="menu-label pt-0 mt-0">
+        <span>Main Menu</span>
+      </li>
+
+
+      <li class="nav-item">
+        <a 
+        [routerLink]="['/home']"
+        [routerLinkActive]="'active another-class'"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link"
+        >
+        <i class="iconoir-home-simple menu-icon"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+
+
+    <li class="nav-item">
+      <a 
+      class="nav-link" 
+      routerLink="/slider" 
+      routerLinkActive="active another-class"
+      >
+      <i class="iconoir-compact-disc menu-icon"></i>
+      <span>Slider</span>
+    </a>
+  </li>
+
+
+  <li class="nav-item">
+    <a 
+    class="nav-link" 
+    routerLink="/sitedetails" 
+    routerLinkActive="active another-class"
+    >
+    <i class="iconoir-apple-shortcuts menu-icon"></i>
+    <span>Site Details</span>
+  </a>
+</li>
+
+
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/websitepieces" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-airplane-helix-45deg menu-icon"></i>
+  <span>Website Pieces</span>
+</a>
+</li>
+
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/services" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-antenna menu-icon"></i>
+  <span>Services</span>
+</a>
+</li>
+
+
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/partners" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-group menu-icon"></i>
+  <span>Partners</span>
+</a>
+</li>
+
+
+
+
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/testimonials" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-walking menu-icon"></i>
+  <span>Testimonials</span>
+</a>
+</li>
+
+
+
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/contact" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-mail menu-icon"></i>
+  <span>Contacts</span>
+</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="#" (click)="logout(); $event.preventDefault()">
+    <i class="iconoir-log-out menu-icon"></i>
+    <span>LogOut</span>
+  </a>
+</li>
+
+<!-- Add more menu items as needed -->
+</ul>
+
+<div class="update-msg text-center">
+  <div class="d-flex justify-content-center align-items-center thumb-lg update-icon-box rounded-circle mx-auto">
+    <i class="iconoir-peace-hand h3 align-self-center mb-0 text-primary"></i>
+  </div>
+  <h5 class="mt-3">MASPRO</h5>
+  <p class="mb-3 text-muted">Safe and Smooth Vessel Operations.</p>
+
+</div>
+
+</div>
+</div>
+
+
+</div>
+
+<!-- Overlay to close sidebar on click -->
+<div class="startbar-overlay d-print-none" (click)="toggleSidebar()"></div>

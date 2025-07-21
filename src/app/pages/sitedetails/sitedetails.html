@@ -1,0 +1,105 @@
+<div class="page-wrapper">
+	<div class="page-content">
+		<div class="container-xxl mt-3">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-12">
+
+					<div class="card">
+						<div class="card-header">
+							<h5>Site Details</h5>
+						</div>
+						<div class="card-body">
+
+							<!-- Instagram -->
+							<div class="mb-3">
+								<label class="form-label text-white">Instagram</label>
+								<input type="text" [(ngModel)]="formData.instagram" class="form-control bg-white text-black" placeholder="Instagram link">
+							</div>
+
+							<!-- Facebook -->
+							<div class="mb-3">
+								<label class="form-label text-white">Facebook</label>
+								<input type="text" [(ngModel)]="formData.facebook" class="form-control bg-white text-black" placeholder="Facebook link">
+							</div>
+
+							<!-- Phone 1 -->
+							<div class="mb-3">
+								<label class="form-label text-white">Phone 1</label>
+								<input type="text" [(ngModel)]="formData.phone1" class="form-control bg-white text-black" placeholder="Primary phone number">
+							</div>
+
+							<!-- Phone 2 -->
+							<div class="mb-3">
+								<label class="form-label text-white">Phone 2</label>
+								<input type="text" [(ngModel)]="formData.phone2" class="form-control bg-white text-black" placeholder="Alternate phone number">
+							</div>
+
+							<!-- Email -->
+							<div class="mb-3">
+								<label class="form-label text-white">Email</label>
+								<input type="email" [(ngModel)]="formData.email" class="form-control bg-white text-black" placeholder="Email address">
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label text-white">Address</label>
+								<input type="text" [(ngModel)]="formData.address" class="form-control bg-white text-black" placeholder="Address">
+							</div>
+
+
+						<!-- 	<div class="mb-3">
+								<label class="form-label text-white">Address</label>
+								<ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+								<ngx-editor
+								[editor]="editor"
+								[(ngModel)]="formData.address"
+								[placeholder]="'Enter address here...'">
+							</ngx-editor>
+						</div> -->
+
+						<!-- Logo Upload -->
+						<div class="mb-4">
+							<label class="form-label text-white">Logo</label>
+							<input type="file" class="form-control" id="file-logo" (change)="onImageSelected($event, 'logo')" accept="image/*" />
+							<div *ngIf="logoPreview" class="mt-2 position-relative d-inline-block">
+								<img [src]="logoPreview" alt="Logo" class="img-thumbnail" style="max-width: 200px;">
+								<button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" style="transform: translate(50%, -50%)" (click)="removeImage('logo')">&times;</button>
+							</div>
+						</div>
+
+						<!-- Favicon Upload -->
+						<div class="mb-4">
+							<label class="form-label text-white">Favicon</label>
+							<input type="file" class="form-control" id="file-favicon" (change)="onImageSelected($event, 'favicon')" accept="image/*" />
+							<div *ngIf="faviconPreview" class="mt-2 position-relative d-inline-block">
+								<img [src]="faviconPreview" alt="Favicon" class="img-thumbnail" style="max-width: 200px;">
+								<button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" style="transform: translate(50%, -50%)" (click)="removeImage('favicon')">&times;</button>
+							</div>
+						</div>
+
+						<!-- Submit -->
+						<div class="text-end">
+							<button class="btn btn-blue" (click)="submitSiteDetails()">Save Site Details</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+</div>
+
+
+<!-- Loader -->
+<div *ngIf="loading" class="text-center my-3">
+	<div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<!-- Success Toast -->
+<div *ngIf="showSuccess" class="toast align-items-center text-white bg-success border-0 show position-fixed bottom-0 end-0 m-3" role="alert">
+	<div class="d-flex">
+		<div class="toast-body">✅ Site details saved!</div>
+		<button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showSuccess = false"></button>
+	</div>
+</div>

@@ -1,0 +1,120 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="container-xxl">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="card-title mb-0">Edit Service</h4>
+            </div>
+            <div class="card-body pt-0">
+              <div class="mb-3">
+                <label for="heading" class="form-label text-white">Heading</label>
+                <input
+                  type="text"
+                  id="heading"
+                  class="form-control bg-white text-black"
+                  [(ngModel)]="heading"
+                  placeholder="Edit service heading"
+                />
+              </div>
+              <!-- Service Points -->
+              <div class="mt-4">
+                <label class="form-label text-white">Service Points</label>
+                <div
+                  *ngFor="let point of servicePoints; let i = index; trackBy: trackByPoint"
+                  class="mb-3 border p-3 rounded bg-light"
+                >
+                  <div class="mb-2">
+                    <label class="form-label text-white">Point Title</label>
+                    <input
+                      type="text"
+                      class="form-control bg-white text-black"
+                      [(ngModel)]="point.title"
+                      placeholder="e.g. Vessel Maintenance & Repairs"
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label text-white">Point Description</label>
+                    <textarea
+                      class="form-control bg-white text-black"
+                      rows="2"
+                      [(ngModel)]="point.description"
+                      placeholder="Describe this point..."
+                    ></textarea>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label text-white">Replace Image (Optional)</label>
+                    <input
+                      type="file"
+                      class="form-control bg-white text-black"
+                      (change)="onPointImageChange($event, i)"
+                      accept="image/*"
+                    />
+                    <small class="text-danger d-block mt-1">
+                      Recommended size: 550 × 659 pixels.
+                    </small>
+                    <div *ngIf="point.preview" class="mt-2">
+                      <img
+                        [src]="point.preview"
+                        class="img-thumbnail"
+                        style="max-width: 150px;"
+                      />
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger"
+                      (click)="removePoint(i)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+                <div class="text-start">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-secondary"
+                    (click)="addPoint()"
+                  >
+                    + Add Point
+                  </button>
+                </div>
+              </div>
+              <!-- Submit -->
+              <div class="mt-4 text-end">
+                <button class="btn btn-blue" (click)="updateService()">Update Service</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div *ngIf="loading" class="text-center my-3">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Success Toast -->
+  <div
+    *ngIf="showSuccess"
+    class="toast align-items-center text-white bg-success border-0 show position-fixed bottom-0 end-0 m-3"
+    role="alert"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        ✅ Service updated successfully!
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="showSuccess = false"
+      ></button>
+    </div>
+  </div>
+</div>

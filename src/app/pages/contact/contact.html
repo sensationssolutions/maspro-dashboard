@@ -1,0 +1,77 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="container-xxl mt-3">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="card-title mb-0">Contact Messages</h4>
+            </div>
+
+            <div class="card-body pt-0">
+              <div class="table-responsive">
+
+                <table class="table mb-0">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Message</th>
+                      <th>Status</th>
+                      <th class="text-end">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <!-- Empty message row -->
+                    <tr *ngIf="contacts.length === 0 && !loading">
+                      <td colspan="6" class="text-center text-muted py-4">
+                        <i class="las la-envelope-open-text fs-2"></i> No contact messages available.
+                      </td>
+                    </tr>
+
+                    <!-- Actual data rows -->
+                    <tr *ngFor="let contact of contacts"
+                    [class.table-secondary]="contact.status"
+                    [style.opacity]="contact.status ? 0.6 : 1">
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.message }}</td>
+                    <td>
+                      <span class="badge" [class.bg-success]="contact.status" [class.bg-danger]="!contact.status">
+                        {{ contact.status ? 'Read' : 'Unread' }}
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <button 
+                      class="btn btn-sm btn-blue" 
+                      *ngIf="!contact.status"
+                      (click)="markAsRead(contact)">
+                      Mark as Read
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+
+
+              
+            </table>
+
+          </div>
+
+          <!-- Loader -->
+          <div *ngIf="loading" class="text-center my-3">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

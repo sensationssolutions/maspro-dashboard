@@ -1,0 +1,111 @@
+<div class="page-wrapper">
+	<div class="page-content">
+		<div class="container-xxl">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-12">
+					<div class="card">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h4 class="card-title mb-0">Edit Testimonial</h4>
+
+						</div>
+
+						<div class="card-body pt-0">
+
+							<!-- Name Input -->
+							<div class="mb-3">
+								<label for="name" class="form-label">Name</label>
+								<input
+								type="text"
+								id="name"
+								class="form-control bg-white text-black"
+								[(ngModel)]="formData.name"
+								placeholder="Enter name"
+								/>
+							</div>
+
+							<!-- Designation Input -->
+							<div class="mb-3">
+								<label for="designation" class="form-label">Designation</label>
+								<input
+								type="text"
+								id="designation"
+								class="form-control bg-white text-black"
+								[(ngModel)]="formData.designation"
+								placeholder="Enter designation"
+								/>
+							</div>
+
+							<!-- Message Textarea -->
+							<div class="mb-3">
+								<label for="message" class="form-label">Message</label>
+								<textarea
+								id="message"
+								rows="4"
+								class="form-control bg-white text-black"
+								[(ngModel)]="formData.message"
+								placeholder="Enter testimonial message"
+								></textarea>
+							</div>
+
+							<!-- File Upload and Preview -->
+							<div class="mt-4">
+								<label for="imageUpload" class="form-label">Upload Image</label>
+								<input
+								type="file"
+								id="imageUpload"
+								class="form-control"
+								(change)="onImageSelected($event)"
+								accept="image/*"
+								/>
+
+								<div *ngIf="imagePreview" class="mt-3 position-relative d-inline-block">
+									<img
+									[src]="imagePreview"
+									alt="Preview"
+									class="img-thumbnail"
+									style="max-width: 200px; max-height: 200px;"
+									/>
+									<button
+									type="button"
+									class="btn btn-sm btn-danger position-absolute top-0 end-0"
+									(click)="removeImage()"
+									style="transform: translate(50%, -50%)"
+									>
+									&times;
+								</button>
+							</div>
+						</div>
+
+						
+						<div class="mt-4 text-end">
+							<button class="btn btn-blue" (click)="updateTestimonial()">Update Testimonial</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<!-- Loader -->
+<div *ngIf="loading" class="text-center my-3">
+	<div class="spinner-border text-primary" role="status">
+		<span class="visually-hidden">Loading...</span>
+	</div>
+</div>
+
+<!-- Success Toast -->
+<div
+*ngIf="showSuccess"
+class="toast align-items-center text-white bg-success border-0 show position-fixed bottom-0 end-0 m-3"
+role="alert"
+>
+<div class="d-flex">
+	<div class="toast-body">
+		✅ Testimonial added successfully!
+	</div>
+	<button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showSuccess = false"></button>
+</div>
+</div>

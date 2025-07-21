@@ -1,0 +1,96 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="container-xxl mt-3">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="card-title mb-0">Partners</h4>
+              <a class="btn btn-sm btn-blue" [routerLink]="['/addpartner']">
+                <i class="las la-plus"></i> Add Partner
+              </a>
+            </div>
+
+            <div class="card-body pt-0">
+              <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                  <thead class="bg-black">
+                    <tr>
+                      <th>#</th>
+                      <th>Logo</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr *ngIf="partners.length === 0 && !loading">
+                      <td colspan="3" class="text-center text-muted py-4">
+                        <i class="las la-tools fs-2"></i> No Partners are available.
+                      </td>
+                    </tr>
+
+                    <tr *ngFor="let p of partners; let i = index">
+                      <td>{{ (currentPage - 1) * 10 + i + 1 }}</td>
+                      <td>
+                        <img
+                        [src]="environment.assetsUrl + p.image_url"
+                        alt="partner logo"
+                        class="rounded bg-light border"
+                        style="width: 100px; height: 60px; object-fit: contain;"
+                        />
+                      </td>
+                      <td class="text-end">
+
+                        <a class="btn btn-sm btn-blue me-2" [routerLink]="['/editpartner', p.id]">
+                          <i class="las la-pen"></i> Edit
+                        </a>
+                        <button class="btn btn-sm btn-danger" (click)="deletePartner(p.id)">
+                          <i class="las la-trash-alt"></i> Delete
+                        </button>
+                      </td>
+                    </tr>
+
+
+
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Loading Spinner -->
+              <div *ngIf="loading" class="text-center my-3">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <button
+                class="btn btn-sm btn-blue"
+                [disabled]="currentPage === 1"
+                (click)="prevPage()"
+                >
+                Previous
+              </button>
+
+              <span>Page {{ currentPage }} of {{ lastPage }}</span>
+
+              <button
+              class="btn btn-sm btn-blue"
+              [disabled]="currentPage === lastPage"
+              (click)="nextPage()"
+              >
+              Next
+            </button>
+          </div>
+
+
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

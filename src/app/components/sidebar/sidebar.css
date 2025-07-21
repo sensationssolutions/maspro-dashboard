@@ -1,0 +1,29 @@
+/* Always visible on desktop */
+.startbar {
+  transition: transform 0.3s ease-in-out;
+  z-index: 1040;
+  position: fixed;
+  height: 100vh;
+  width: 260px;
+  top: 0;
+  left: 0;
+}
+
+/* Hidden on mobile by default */
+@media (max-width: 991.98px) {
+  .startbar {
+    transform: translateX(-100%);
+  }
+
+  .startbar-visible {
+    transform: translateX(0);
+  }
+
+  .startbar-overlay {
+    display: none;
+  }
+
+  .startbar-overlay.d-block {
+    display: block !important;
+  }
+}
