@@ -1,1 +1,1 @@
-var iconTochange;dragula([document.getElementById("project-list-start"),document.getElementById("project-list-center"),document.getElementById("project-list-end")]);
+var iconTochange;var start=document.getElementById("project-list-start"),center=document.getElementById("project-list-center"),end=document.getElementById("project-list-end");var lists=[];if(start)lists.push(start);if(center)lists.push(center);if(end)lists.push(end);if(lists.length)dragula(lists);

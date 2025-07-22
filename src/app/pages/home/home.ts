@@ -23,6 +23,8 @@ export class Home {
   total_contacts: 0,
   total_sliders: 0,
   total_partners: 0,
+  total_products: 0,
+  total_categories: 0,
 };
 
 ngOnInit() {

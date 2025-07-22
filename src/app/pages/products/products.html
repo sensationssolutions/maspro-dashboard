@@ -1,0 +1,96 @@
+<div class="page-wrapper">
+	<div class="page-content">
+		<div class="container-xxl mt-3">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-12">
+					<div class="card mt-3">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h4 class="card-title mb-0">Products</h4>
+							<a class="btn btn-sm btn-blue" [routerLink]="['/addproduct']">
+								<i class="las la-plus"></i> Add Product
+							</a>
+						</div>
+
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-striped mb-0">
+									<thead class="bg-black">
+										<tr>
+											<th>Name</th>
+											<th>Product-Category</th>
+											<th>Description</th>
+											<th>Price</th>
+											<th>Status</th>
+											<th>Image</th>
+											<th class="text-end">Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngIf="loading">
+											<td colspan="7" class="text-center">
+												<div class="spinner-border text-primary" role="status">
+													<span class="visually-hidden">Loading...</span>
+												</div>
+											</td>
+										</tr>
+										<tr *ngIf="!loading && products.length === 0">
+											<td colspan="7" class="text-center text-muted py-4">
+												<i class="las la-info-circle fs-2"></i> No Products available.
+											</td>
+										</tr>
+										<tr *ngFor="let product of products">
+											<td><strong>{{ product.name }}</strong></td>
+											<td>{{ getProductCategoryName(product.product_category_id) }}</td>
+											<td>{{ product.description?.length > 50 ? (product.description | slice:0:50) + '...' : product.description }}</td>
+											<td>{{ product.price | currency }}</td>
+											<td>
+												<span class="badge" [ngClass]="product.status ? 'bg-success' : 'bg-secondary'">
+													{{ product.status ? 'Active' : 'Inactive' }}
+												</span>
+											</td>
+											<td>
+												<img *ngIf="product.image"
+													[src]="environment.assetsUrl + product.image"
+													alt="product"
+													class="rounded-circle thumb-md me-1 d-inline"
+													style="width: 60px; height: 60px; object-fit: cover"
+												/>
+											</td>
+											<td class="text-end">
+												<a class="btn btn-sm btn-blue me-2" [routerLink]="['/editproduct', product.id]">
+													<i class="las la-pen"></i> Edit
+												</a>
+												<button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">
+													<i class="las la-trash-alt"></i> Delete
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<!-- Pagination -->
+							<div class="d-flex justify-content-between align-items-center mt-3" *ngIf="lastPage > 1">
+								<button
+									class="btn btn-sm btn-blue"
+									[disabled]="currentPage === 1"
+									(click)="goToPage(currentPage - 1)"
+								>
+									Previous
+								</button>
+								<span>Page {{ currentPage }} of {{ lastPage }}</span>
+								<button
+									class="btn btn-sm btn-blue"
+									[disabled]="currentPage === lastPage"
+									(click)="goToPage(currentPage + 1)"
+								>
+									Next
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 

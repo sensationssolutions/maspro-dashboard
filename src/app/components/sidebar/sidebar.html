@@ -39,30 +39,108 @@
       </a>
     </li>
 
+    <!-- Product Management Section -->
+    <li class="menu-label">
+      <span>Product Management</span>
+    </li>
 
     <li class="nav-item">
-      <a 
-      class="nav-link" 
-      routerLink="/slider" 
-      routerLinkActive="active another-class"
-      >
-      <i class="iconoir-compact-disc menu-icon"></i>
-      <span>Slider</span>
-    </a>
-  </li>
+      <a class="nav-link" routerLink="/categories" routerLinkActive="active another-class" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="iconoir-airplane menu-icon"></i>
+        <span>Categories</span>
+      </a>
+    </li>
 
 
-  <li class="nav-item">
-    <a 
-    class="nav-link" 
-    routerLink="/sitedetails" 
-    routerLinkActive="active another-class"
-    >
-    <i class="iconoir-apple-shortcuts menu-icon"></i>
-    <span>Site Details</span>
-  </a>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/subcategories" routerLinkActive="active another-class">
+        <i class="iconoir-archery menu-icon"></i>
+        <span>Sub Categories</span>
+      </a>
+    </li>
+
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/productcategories" routerLinkActive="active another-class">
+        <i class="iconoir-archery menu-icon"></i>
+        <span>Product Categories</span>
+      </a>
+    </li>
+
+
+
+   <!--  <li class="nav-item">
+      <a class="nav-link" routerLink="/addcategory" routerLinkActive="active another-class">
+        <i class="iconoir-plus menu-icon"></i>
+        <span>Add Category</span>
+      </a>
+    </li> -->
+    <!-- <li class="nav-item">
+      <a class="nav-link" routerLink="/categories/1/types" routerLinkActive="active another-class">
+        <i class="iconoir-archery menu-icon"></i>
+        <span>Types</span>
+      </a>
+    </li> -->
+    <!-- <li class="nav-item">
+      <a class="nav-link" routerLink="/addtype" routerLinkActive="active another-class">
+        <i class="iconoir-plus menu-icon"></i>
+        <span>Add Type</span>
+      </a>
+    </li> -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/products" routerLinkActive="active another-class">
+        <i class="iconoir-cart-alt menu-icon"></i>
+        <span>Products</span>
+      </a>
+    </li>
+    
+  <!--   <li class="nav-item">
+      <a class="nav-link" routerLink="/addproduct" routerLinkActive="active another-class">
+        <i class="iconoir-plus menu-icon"></i>
+        <span>Add Product</span>
+      </a>
+    </li> -->
+
+<!-- Example link to a product detail page (optional) -->
+<!--
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/products/1" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-info-empty menu-icon"></i>
+  <span>Product Detail</span>
+</a>
+</li>
+-->
+
+<!-- Content Management Section -->
+<li class="menu-label">
+  <span>Content Management</span>
 </li>
 
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/slider" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-compact-disc menu-icon"></i>
+  <span>Slider</span>
+</a>
+</li>
+
+<li class="nav-item">
+  <a 
+  class="nav-link" 
+  routerLink="/sitedetails" 
+  routerLinkActive="active another-class"
+  >
+  <i class="iconoir-apple-shortcuts menu-icon"></i>
+  <span>Site Details</span>
+</a>
+</li>
 
 <li class="nav-item">
   <a 
@@ -75,7 +153,7 @@
 </a>
 </li>
 
-<li class="nav-item">
+<!-- <li class="nav-item">
   <a 
   class="nav-link" 
   routerLink="/services" 
@@ -85,7 +163,7 @@
   <span>Services</span>
 </a>
 </li>
-
+-->
 
 <li class="nav-item">
   <a 
@@ -98,9 +176,6 @@
 </a>
 </li>
 
-
-
-
 <li class="nav-item">
   <a 
   class="nav-link" 
@@ -111,8 +186,6 @@
   <span>Testimonials</span>
 </a>
 </li>
-
-
 
 <li class="nav-item">
   <a 

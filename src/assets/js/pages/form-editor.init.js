@@ -1,1 +1,1 @@
-const quill=new Quill("#editor",{theme:"snow"});
+var editorEl=document.querySelector("#editor");if(editorEl){const quill=new Quill("#editor",{theme:"snow"});}

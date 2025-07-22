@@ -45,7 +45,13 @@ try {
 
 function windowScroll() {
     var e = document.getElementById("topbar-custom");
-    null != e && (50 <= document.body.scrollTop || 50 <= document.documentElement.scrollTop ? e.classList.add("nav-sticky") : e.classList.remove("nav-sticky"))
+    if (e) {
+        if (50 <= document.body.scrollTop || 50 <= document.documentElement.scrollTop) {
+            e.classList.add("nav-sticky");
+        } else {
+            e.classList.remove("nav-sticky");
+        }
+    }
 }
 window.addEventListener("scroll", e => {
     e.preventDefault(), windowScroll()
@@ -66,9 +72,17 @@ const initVerticalMenu = () => {
     }), document.querySelector(".navbar-nav") && (document.querySelectorAll(".navbar-nav a").forEach(function(t) {
         var e = window.location.href.split(/[?#]/)[0];
         if (t.href === e) {
-            t.classList.add("active"), t.parentNode.classList.add("active");
-            let e = t.closest(".collapse");
-            for (; e;) e.classList.add("show"), e.parentElement.children[0].classList.add("active"), e.parentElement.children[0].setAttribute("aria-expanded", "true"), e = e.parentElement.closest(".collapse")
+            t.classList && t.classList.add("active");
+            t.parentNode && t.parentNode.classList && t.parentNode.classList.add("active");
+            let el = t.closest(".collapse");
+            for (; el;) {
+                el.classList && el.classList.add("show");
+                if (el.parentElement && el.parentElement.children[0] && el.parentElement.children[0].classList) {
+                    el.parentElement.children[0].classList.add("active");
+                    el.parentElement.children[0].setAttribute("aria-expanded", "true");
+                }
+                el = el.parentElement ? el.parentElement.closest(".collapse") : null;
+            }
         }
     }), setTimeout(function() {
         var e, a, n, r, c, l, t = document.querySelector(".nav-item li a.active");
@@ -78,7 +92,13 @@ const initVerticalMenu = () => {
             var e, t, o = (e /= n / 2) < 1 ? o / 2 * e * e + t : -o / 2 * (--e * (e - 2) - 1) + t;
             a.scrollTop = o, l < n && setTimeout(d, 20)
         }
-        null != t && (e = document.querySelector(".main-nav .simplebar-content-wrapper"), t = t.offsetTop - 300, e) && 100 < t && (n = 600, r = (a = e).scrollTop, c = t - r, l = 0, d())
+        if (t) {
+            e = document.querySelector(".main-nav .simplebar-content-wrapper");
+            t = t.offsetTop - 300;
+            if (e && 100 < t) {
+                n = 600, r = (a = e).scrollTop, c = t - r, l = 0, d();
+            }
+        }
     }, 200))
 };
 initVerticalMenu();

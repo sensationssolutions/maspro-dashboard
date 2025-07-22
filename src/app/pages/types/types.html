@@ -1,0 +1,84 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="container-xxl mt-3">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="card-title mb-0">Types</h4>
+              <a class="btn btn-sm btn-blue" [routerLink]="['/addtype']">
+                <i class="las la-plus"></i> Add Type
+              </a>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                  <thead class="bg-black">
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Status</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="loading">
+                      <td colspan="4" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="!loading && types.length === 0">
+                      <td colspan="4" class="text-center text-muted py-4">
+                        <i class="las la-info-circle fs-2"></i> No Types available.
+                      </td>
+                    </tr>
+                    <tr *ngFor="let type of types">
+                      <td><strong>{{ type.name }}</strong></td>
+                      <td>{{ type.description?.length > 80 ? (type.description | slice:0:80) + '...' : type.description }}</td>
+                      <td>
+                        <span class="badge" [ngClass]="type.status ? 'bg-success' : 'bg-secondary'">
+                          {{ type.status ? 'Active' : 'Inactive' }}
+                        </span>
+                      </td>
+                      <td class="text-end">
+                        <a class="btn btn-sm btn-blue me-2" [routerLink]="['/edittype', type.id]">
+                          <i class="las la-pen"></i> Edit
+                        </a>
+                        <button class="btn btn-sm btn-danger" (click)="deleteType(type.id)">
+                          <i class="las la-trash-alt"></i> Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Pagination (if needed) -->
+              <!--
+              <div class="d-flex justify-content-between align-items-center mt-3" *ngIf="lastPage > 1">
+                <button
+                  class="btn btn-sm btn-blue"
+                  [disabled]="currentPage === 1"
+                  (click)="goToPage(currentPage - 1)"
+                >
+                  Previous
+                </button>
+                <span>Page {{ currentPage }} of {{ lastPage }}</span>
+                <button
+                  class="btn btn-sm btn-blue"
+                  [disabled]="currentPage === lastPage"
+                  (click)="goToPage(currentPage + 1)"
+                >
+                  Next
+                </button>
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,146 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="container-xxl mt-3">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title mb-0">Add Category</h4>
+            </div>
+
+            <div class="card-body">
+              <form (ngSubmit)="addCategory()" #categoryForm="ngForm">
+                <!-- Name -->
+                <div class="mb-3">
+                  <label class="form-label">Name</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="formData.name"
+                    name="name"
+                    required
+                    #nameInput="ngModel"
+                    (input)="onNameChange()"
+                  >
+                  <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger mt-1">
+                    <small>Name is required</small>
+                  </div>
+                </div>
+
+                <!-- Slug -->
+                <div class="mb-3">
+                  <label class="form-label">Slug</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="formData.slug"
+                    name="slug"
+                    required
+                    #slugInput="ngModel"
+                    (input)="onSlugChange()"
+                    placeholder="e.g. my-category"
+                  >
+                  <div *ngIf="slugInput.invalid && slugInput.touched" class="text-danger mt-1">
+                    <small>Slug is required</small>
+                  </div>
+                </div>
+
+                <!-- Title -->
+                <div class="mb-3">
+                  <label class="form-label">Title</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="formData.title"
+                    name="title"
+                    required
+                    #titleInput="ngModel"
+                    placeholder="Enter title"
+                  >
+                  <div *ngIf="titleInput.invalid && titleInput.touched" class="text-danger mt-1">
+                    <small>Title is required</small>
+                  </div>
+                </div>
+
+                <!-- Description (ngx-editor) -->
+                <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <ngx-editor-menu [editor]="descriptionEditor" [toolbar]="toolbar"></ngx-editor-menu>
+                  <ngx-editor
+                    [editor]="descriptionEditor"
+                    [(ngModel)]="formData.description"
+                    name="description"
+                    [placeholder]="'Enter description...'"></ngx-editor>
+                </div>
+
+                <!-- Status -->
+                <div class="mb-3">
+                  <div class="form-check form-switch">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox"
+                      [(ngModel)]="formData.status"
+                      name="status"
+                    >
+                    <label class="form-check-label">Active</label>
+                  </div>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="mb-3">
+                  <label class="form-label">Image</label>
+                  <input 
+                    type="file" 
+                    class="form-control" 
+                    accept="image/*"
+                    (change)="onImageSelected($event)"
+                  >
+                  <small class="text-muted">Maximum file size: 2MB</small>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="mb-3" *ngIf="imagePreview">
+                 
+                  <div class="position-relative d-inline-block">
+                    <img 
+                      [src]="imagePreview" 
+                      alt="Category preview" 
+                      class="rounded"
+                      style="max-width: 200px; max-height: 200px;"
+                    >
+                    <button 
+                      type="button"
+                      class="btn btn-sm btn-danger position-absolute top-0 end-0"
+                      (click)="removeImage()"
+                    >
+                      <i class="las la-times"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end">
+                  <button 
+                    type="button" 
+                    class="btn btn-secondary me-2" 
+                    routerLink="/categories"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit" 
+                    class="btn btn-primary"
+                    [disabled]="!categoryForm.form.valid || loading"
+                  >
+                    <i class="las" [ngClass]="loading ? 'la-spinner la-spin' : 'la-save'"></i>
+                    {{ loading ? 'Adding...' : 'Add Category' }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

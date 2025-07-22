@@ -1,0 +1,153 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="container-xxl mt-3">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title mb-0">Edit Sub-Category</h4>
+            </div>
+
+            <div class="card-body">
+              <form (ngSubmit)="updateSubcategory()" #subcategoryForm="ngForm">
+                <!-- Parent Category -->
+                <div class="mb-3">
+                  <label class="form-label">Parent Category</label>
+                  <select 
+                    class="form-select"
+                    [(ngModel)]="formData.category_id"
+                    name="category_id"
+                    required
+                    #categoryInput="ngModel"
+                  >
+                    <option value="">Select Category</option>
+                    <option *ngFor="let category of categories" [ngValue]="category.id">
+                      {{ category.name }}
+                    </option>
+                  </select>
+                  <div *ngIf="categoryInput.invalid && categoryInput.touched" class="text-danger mt-1">
+                    <small>Parent category is required</small>
+                  </div>
+                </div>
+
+                <!-- Name -->
+                <div class="mb-3">
+                  <label class="form-label">Name</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="formData.name"
+                    name="name"
+                    required
+                    #nameInput="ngModel"
+                    (input)="onNameChange()"
+                  >
+                  <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger mt-1">
+                    <small>Name is required</small>
+                  </div>
+                </div>
+
+                <!-- Slug -->
+                <div class="mb-3">
+                  <label class="form-label">Slug</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="formData.slug"
+                    name="slug"
+                    required
+                    #slugInput="ngModel"
+                    (input)="onSlugChange()"
+                    placeholder="e.g. my-subcategory"
+                  >
+                  <div *ngIf="slugInput.invalid && slugInput.touched" class="text-danger mt-1">
+                    <small>Slug is required</small>
+                  </div>
+                </div>
+
+
+                   <!-- Slug -->
+                <div class="mb-3">
+                  <label class="form-label">Title</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="formData.title"
+                    name="title"
+                    required
+                    #slugInput="ngModel"
+                    (input)="onSlugChange()"
+                    placeholder="e.g. my-subcategory"
+                  >
+                  <div *ngIf="slugInput.invalid && slugInput.touched" class="text-danger mt-1">
+                    <small>Slug is required</small>
+                  </div>
+                </div>
+
+                <!-- Description (ngx-editor) -->
+                <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <ngx-editor-menu [editor]="descriptionEditor" [toolbar]="toolbar"></ngx-editor-menu>
+                  <ngx-editor
+                    [editor]="descriptionEditor"
+                    [(ngModel)]="formData.description"
+                    name="description"
+                    [placeholder]="'Enter description...'"></ngx-editor>
+                </div>
+
+                <!-- Specifications -->
+                <div class="card mb-3">
+                  <div class="">
+                    <h5 class="mb-0">Specifications</h5>
+                  </div>
+                  <div class="card-body">
+                    <div *ngFor="let key of objectKeys(specificationOptions)" class="mb-3">
+                      <label class="form-label">{{ key }}</label>
+                      <select class="form-select"
+                              [(ngModel)]="formData.specifications[key]"
+                              [name]="key">
+                        <option *ngFor="let option of specificationOptions[key]" [value]="option">{{ option }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Status -->
+                <div class="mb-3">
+                  <div class="form-check form-switch">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox"
+                      [(ngModel)]="formData.status"
+                      name="status"
+                    >
+                    <label class="form-check-label">Active</label>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end">
+                  <button 
+                    type="button" 
+                    class="btn btn-secondary me-2" 
+                    routerLink="/subcategories"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit" 
+                    class="btn btn-primary"
+                    [disabled]="!subcategoryForm.form.valid || loading"
+                  >
+                    <i class="las" [ngClass]="loading ? 'la-spinner la-spin' : 'la-save'"></i>
+                    {{ loading ? 'Updating...' : 'Update Sub-Category' }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
