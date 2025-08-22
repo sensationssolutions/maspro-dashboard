@@ -39,49 +39,10 @@ export const routes: Routes = [
   },
 
   {
-    path: 'subcategories',
-    loadComponent: () => import('./pages/subcategories/subcategories').then(m => m.Subcategories),
-    canActivate: [authGuard]
-  },
-
-  {
-    path: 'addsubcategory',
-    loadComponent: () => import('./pages/addsubcategory/addsubcategory').then(m => m.Addsubcategory),
-    canActivate: [authGuard]
-  },
-
-  {
-    path: 'editsubcategory/:id',
-    loadComponent: () => import('./pages/editsubcategory/editsubcategory').then(m => m.Editsubcategory),
-    canActivate: [authGuard]
-  },
-
-  {
-    path: 'productcategories',
-    loadComponent: () => import('./pages/productcategories/productcategories').then(m => m.Productcategories),
-    canActivate: [authGuard]
-  },
-
-  {
-    path: 'addproductcategory',
-    loadComponent: () => import('./pages/addproductcategory/addproductcategory').then(m => m.Addproductcategory),
-    canActivate: [authGuard]
-  },
-
-  {
-    path: 'editproductcategory/:id',
-    loadComponent: () => import('./pages/editproductcategory/editproductcategory').then(m => m.Editproductcategory),
-    canActivate: [authGuard]
-  },
-
-
-
-  {
     path: 'products',
     loadComponent: () => import('./pages/products/products').then(m => m.Products),
     canActivate: [authGuard]
   },
-
 
   // {
   //   path: 'categories/:categoryId/types',
@@ -139,6 +100,23 @@ export const routes: Routes = [
   {
     path: 'edittestimonial/:id',
     loadComponent: () => import('./pages/edittestimonial/edittestimonial').then(m => m.Edittestimonial),
+    canActivate: [authGuard]
+  },
+
+  // Blog routes
+  {
+    path: 'blogs',
+    loadComponent: () => import('./pages/blogs/blogs').then(m => m.Blogs),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'addblog',
+    loadComponent: () => import('./pages/addblog/addblog').then(m => m.Addblog),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editblog/:id',
+    loadComponent: () => import('./pages/editblog/editblog').then(m => m.Editblog),
     canActivate: [authGuard]
   },
 

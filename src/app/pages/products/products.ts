@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class Products implements OnInit {
   environment = environment;
   products: any[] = [];
-  productCategories: any[] = [];
+  categories: any[] = [];
   currentPage = 1;
   lastPage = 1;
   loading = false;
@@ -24,7 +24,7 @@ export class Products implements OnInit {
 
   ngOnInit(): void {
     this.fetchProducts();
-    this.fetchProductCategories();
+    this.fetchCategories();
   }
 
   fetchProducts(page: number = 1) {
@@ -35,7 +35,12 @@ export class Products implements OnInit {
 
     this.http.get<any>(`${environment.apiUrl}/products`, { headers, params }).subscribe({
       next: (res) => {
+        console.log('Products API response:', res);
         this.products = res.data || res;
+        console.log('Processed products:', this.products);
+        if (this.products.length > 0 && this.products[0].images) {
+          console.log('First product images:', this.products[0].images);
+        }
         this.currentPage = res.current_page || 1;
         this.lastPage = res.last_page || 1;
         this.loading = false;
@@ -48,23 +53,23 @@ export class Products implements OnInit {
     });
   }
 
-  fetchProductCategories() {
+  fetchCategories() {
     const token = localStorage.getItem('auth_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    this.http.get<any>(`${environment.apiUrl}/product-categories`, { headers }).subscribe({
+    this.http.get<any>(`${environment.apiUrl}/categories`, { headers }).subscribe({
       next: (res) => {
-        this.productCategories = res.data || res;
+        this.categories = res.data || res;
       },
       error: (err) => {
-        console.error('Failed to load product-categories:', err);
+        console.error('Failed to load categories:', err);
       }
     });
   }
 
-  getProductCategoryName(productCategoryId: number): string {
-    const productCategory = this.productCategories.find(pc => pc.id === productCategoryId);
-    return productCategory ? productCategory.name : 'Unknown';
+  getCategoryName(categoryId: number): string {
+    const category = this.categories.find(c => c.id === categoryId);
+    return category ? category.name : 'Unknown';
   }
 
   deleteProduct(id: number) {
@@ -101,8 +106,24 @@ export class Products implements OnInit {
   }
 
   goToPage(page: number) {
-    if (page >= 1 && page <= this.lastPage) {
-      this.fetchProducts(page);
-    }
+    this.currentPage = page;
+    this.fetchProducts(page);
+  }
+
+  getImageUrl(imagePath: string): string {
+    // Remove any leading slash from imagePath to avoid double slashes
+    const cleanImagePath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
+    const url = environment.assetsUrl + 'storage/' + cleanImagePath;
+    console.log('Image URL:', url);
+    return url;
+  }
+
+  onImageError(event: any, image: any) {
+    console.error('Image failed to load:', image.image, 'URL:', event.target.src);
+    console.error('Full image object:', image);
+  }
+
+  onImageLoad(event: any, image: any) {
+    console.log('Image loaded successfully:', image.image, 'URL:', event.target.src);
   }
 } 

@@ -104,6 +104,9 @@
                       alt="Category preview" 
                       class="rounded"
                       style="max-width: 200px; max-height: 200px;"
+                      (error)="onImageError($event, formData)"
+                      (load)="onImageLoad($event, formData)"
+                      onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgMTI1QzEwMCAxMTUuMDUyOCAxMDkuNDcxNyAxMDUgMTIwIDEwNUMxMzAuNTI4MyAxMDUgMTQwIDExNS4wNTI4IDE0MCAxMjVDMTQwIDEzNS41MjgzIDEzMC41MjgzIDE0NSAxMjAgMTQ1QzEwOS40NzE3IDE0NSAxMDAgMTM1LjUyODMgMTAwIDEyNVoiIGZpbGw9IiM5QjlCQTAiLz4KPHBhdGggZD0iTTEwMCAxMjVDMTAwIDExNS4wNTI4IDEwOS40NzE3IDEwNSAxMjAgMTA1QzEzMC41MjgzIDEwNSAxNDAgMTE1LjA1MjggMTQwIDEyNUMxNDAgMTM1LjUyODMgMTMwLjUyODMgMTQ1IDEyMCAxNDVDMTA5LjQ3MTcgMTQ1IDEwMCAxMzUuNTI4MyAxMDAgMTI1WiIgZmlsbD0iIzlCOUJBQCIvPgo8L3N2Zz4K'"
                     >
                     <button 
                       type="button"

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "maspro_dashboard": {
+    "maspro": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -71,10 +71,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "maspro_dashboard:build:production"
+              "buildTarget": "maspro:build:production"
             },
             "development": {
-              "buildTarget": "maspro_dashboard:build:development"
+              "buildTarget": "maspro:build:development"
             }
           },
           "defaultConfiguration": "development"

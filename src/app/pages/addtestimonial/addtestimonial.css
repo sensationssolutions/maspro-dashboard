@@ -1,0 +1,28 @@
+/* Star Rating Styles */
+.star-rating {
+  margin-top: 10px;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.star {
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.star:hover {
+  color: #ffd700 !important;
+}
+
+.star.active {
+  color: #ffd700 !important;
+}
+
+.star-rating small {
+  color: #6c757d;
+  font-size: 12px;
+}

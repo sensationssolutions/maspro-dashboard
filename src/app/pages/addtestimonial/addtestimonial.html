@@ -46,6 +46,25 @@
                 ></textarea>
               </div>
 
+              <!-- Star Rating Input -->
+              <div class="mb-3">
+                <label class="form-label">Rating (Stars)</label>
+                <div class="star-rating">
+                  <div class="stars">
+                    <span 
+                      *ngFor="let star of [1,2,3,4,5]; let i = index" 
+                      class="star" 
+                      [class.active]="i < formData.stars"
+                      (click)="setRating(star)"
+                      style="font-size: 24px; cursor: pointer; color: #ddd; margin-right: 5px;"
+                    >
+                      ★
+                    </span>
+                  </div>
+                  <small class="text-muted">Click on stars to set rating ({{ formData.stars }}/5)</small>
+                </div>
+              </div>
+
               <!-- File Upload and Preview -->
               <div class="mt-4">
                 <label for="imageUpload" class="form-label">Upload Image</label>

@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-
-
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
 
  constructor(private http: HttpClient) {}
 
@@ -40,6 +39,5 @@ ngOnInit() {
     }
   });
 }
-
 
 }

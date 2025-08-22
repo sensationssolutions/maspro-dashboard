@@ -6,7 +6,7 @@ export const environment = {
   // assetsUrl: 'https://api.stadshaven.com/public/',
 
   apiUrl: 'http://127.0.0.1:8000/api',
-  frontendUrl: 'http://localhost:4200',
+  frontendUrl: 'http://localhost:60042',
   assetsUrl: 'http://127.0.0.1:8000/',
   
 };

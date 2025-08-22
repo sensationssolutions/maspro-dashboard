@@ -16,45 +16,55 @@
 								<table class="table table-striped mb-0">
 									<thead class="bg-black">
 										<tr>
+											<th>Images</th>
 											<th>Name</th>
-											<th>Product-Category</th>
+											<th>Category</th>
 											<th>Description</th>
-											<th>Price</th>
 											<th>Status</th>
-											<th>Image</th>
 											<th class="text-end">Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr *ngIf="loading">
-											<td colspan="7" class="text-center">
+											<td colspan="6" class="text-center">
 												<div class="spinner-border text-primary" role="status">
 													<span class="visually-hidden">Loading...</span>
 												</div>
 											</td>
 										</tr>
 										<tr *ngIf="!loading && products.length === 0">
-											<td colspan="7" class="text-center text-muted py-4">
+											<td colspan="6" class="text-center text-muted py-4">
 												<i class="las la-info-circle fs-2"></i> No Products available.
 											</td>
 										</tr>
 										<tr *ngFor="let product of products">
+											<td>
+												<div class="d-flex gap-1" *ngIf="product.images && product.images.length > 0">
+													<img 
+														*ngFor="let image of product.images.slice(0, 3)" 
+														[src]="getImageUrl(image.image)"
+														class="rounded" 
+														style="width: 40px; height: 40px; object-fit: cover;"
+														[alt]="image.alt_text || product.name"
+														(error)="onImageError($event, image)"
+														(load)="onImageLoad($event, image)"
+														
+													>
+													<span *ngIf="product.images.length > 3" class="text-muted small">
+														+{{ product.images.length - 3 }}
+													</span>
+												</div>
+												<span class="text-muted small" *ngIf="!product.images || product.images.length === 0">
+													No images
+												</span>
+											</td>
 											<td><strong>{{ product.name }}</strong></td>
-											<td>{{ getProductCategoryName(product.product_category_id) }}</td>
+											<td>{{ product.category?.name || getCategoryName(product.category_id) }}</td>
 											<td>{{ product.description?.length > 50 ? (product.description | slice:0:50) + '...' : product.description }}</td>
-											<td>{{ product.price | currency }}</td>
 											<td>
 												<span class="badge" [ngClass]="product.status ? 'bg-success' : 'bg-secondary'">
 													{{ product.status ? 'Active' : 'Inactive' }}
 												</span>
-											</td>
-											<td>
-												<img *ngIf="product.image"
-													[src]="environment.assetsUrl + product.image"
-													alt="product"
-													class="rounded-circle thumb-md me-1 d-inline"
-													style="width: 60px; height: 60px; object-fit: cover"
-												/>
 											</td>
 											<td class="text-end">
 												<a class="btn btn-sm btn-blue me-2" [routerLink]="['/editproduct', product.id]">

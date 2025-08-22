@@ -66,7 +66,7 @@ export class Editcategory implements OnInit, OnDestroy {
             status: res.status
           };
           if (res.image) {
-            this.imagePreview = `${environment.assetsUrl}${res.image}`;
+            this.imagePreview = this.getImageUrl(res.image);
           }
         },
         error: (err) => {
@@ -145,5 +145,21 @@ export class Editcategory implements OnInit, OnDestroy {
   removeImage() {
     this.selectedImage = null;
     this.imagePreview = null;
+  }
+
+  private getImageUrl(imagePath: string): string {
+    // Remove any leading slash from imagePath to avoid double slashes
+    const cleanImagePath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
+    const url = environment.assetsUrl  + cleanImagePath;
+    console.log('Edit Category Image URL:', url);
+    return url;
+  }
+
+  onImageError(event: any, image: any) {
+    console.error('Edit category image failed to load:', image, 'URL:', event.target.src);
+  }
+
+  onImageLoad(event: any, image: any) {
+    console.log('Edit category image loaded successfully:', image, 'URL:', event.target.src);
   }
 } 

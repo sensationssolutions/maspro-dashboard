@@ -1,0 +1,86 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-blogs',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
+  templateUrl: './blogs.html',
+  styleUrls: ['./blogs.css']
+})
+export class Blogs implements OnInit {
+  environment = environment;
+  blogs: any[] = [];
+  currentPage = 1;
+  lastPage = 1;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.fetchBlogs();
+  }
+
+  fetchBlogs(page: number = 1) {
+    const token = localStorage.getItem('auth_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const params = new HttpParams().set('page', page.toString());
+
+    this.http.get<any>(`${environment.apiUrl}/blogs`, { headers, params }).subscribe({
+      next: (res) => {
+        this.blogs = res.data;
+        this.currentPage = res.current_page;
+        this.lastPage = res.last_page;
+      },
+      error: (err) => {
+        console.error('Failed to load blogs:', err);
+      }
+    });
+  }
+
+  deleteBlog(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This blog and all associated images will be deleted.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem('auth_token');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+        this.http.delete<any>(`${environment.apiUrl}/blogs/${id}`, { headers }).subscribe({
+          next: () => {
+            this.blogs = this.blogs.filter(b => b.id !== id);
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Blog deleted successfully.',
+              icon: 'success',
+              timer: 1500,
+              showConfirmButton: false
+            });
+          },
+          error: () => {
+            Swal.fire('Error', 'Failed to delete the blog.', 'error');
+          }
+        });
+      }
+    });
+  }
+
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.lastPage) {
+      this.fetchBlogs(page);
+    }
+  }
+
+  formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleDateString();
+  }
+}

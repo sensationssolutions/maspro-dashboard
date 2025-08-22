@@ -22,7 +22,8 @@ export class Edittestimonial implements OnInit {
     name: '',
     designation: '',
     message: '',
-    image_url: ''
+    image_url: '',
+    stars: 5
   };
 
   selectedImage: File | null = null;
@@ -53,6 +54,7 @@ export class Edittestimonial implements OnInit {
         this.formData.designation = res.designation;
         this.formData.message = res.message;
         this.formData.image_url = res.image_url;
+        this.formData.stars = res.stars || 5;
         this.imagePreview = this.environment.assetsUrl + res.image_url;
       },
       error: () => {
@@ -70,6 +72,10 @@ export class Edittestimonial implements OnInit {
       };
       reader.readAsDataURL(this.selectedImage);
     }
+  }
+
+  setRating(rating: number) {
+    this.formData.stars = rating;
   }
 
   removeImage() {
@@ -93,6 +99,7 @@ export class Edittestimonial implements OnInit {
     data.append('name', this.formData.name);
     data.append('designation', this.formData.designation);
     data.append('message', this.formData.message);
+    data.append('stars', this.formData.stars.toString());
     if (this.selectedImage) {
       data.append('image', this.selectedImage);
     }

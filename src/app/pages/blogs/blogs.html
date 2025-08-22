@@ -1,0 +1,87 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="container-xxl mt-3">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="card-title mb-0">Blogs</h4>
+              <a class="btn btn-sm btn-blue" [routerLink]="['/addblog']">
+                <i class="las la-plus"></i> Add Blog
+              </a>
+            </div>
+
+            <div class="card-body pt-0">
+              <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                  <thead class="bg-black">
+                    <tr>
+                      <th>Images</th>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Date</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="blogs.length === 0">
+                      <td colspan="5" class="text-center text-muted py-4">
+                        <i class="las la-info-circle fs-2"></i> No blogs available.
+                      </td>
+                    </tr>
+                    <tr *ngFor="let b of blogs">
+                      <td>
+                        <div class="d-flex gap-1">
+                          <img
+                            *ngFor="let image of b.images?.slice(0, 2)"
+                            [src]="environment.assetsUrl + 'storage/' + image.image_url"
+                            alt="blog image"
+                            class="rounded thumb-sm"
+                            style="width: 50px; height: 50px; object-fit: cover"
+                          />
+                          <div *ngIf="b.images?.length > 2" class="d-flex align-items-center justify-content-center thumb-sm rounded bg-light" style="width: 50px; height: 50px;">
+                            <span class="text-muted small">+{{ b.images.length - 2 }}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>{{ b.title }}</td>
+                      <td [innerHTML]="b.description"></td>
+                      <td>{{ formatDate(b.date) }}</td>
+                      <td class="text-end">
+                        <a class="btn btn-sm btn-blue me-2" [routerLink]="['/editblog', b.id]">
+                          <i class="las la-pen"></i> Edit
+                        </a>
+                        <button class="btn btn-sm btn-danger" (click)="deleteBlog(b.id)">
+                          <i class="las la-trash-alt"></i> Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Pagination -->
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <button
+                  class="btn btn-sm btn-blue"
+                  [disabled]="currentPage === 1"
+                  (click)="goToPage(currentPage - 1)"
+                >
+                  Previous
+                </button>
+                <span>Page {{ currentPage }} of {{ lastPage }}</span>
+                <button
+                  class="btn btn-sm btn-blue"
+                  [disabled]="currentPage === lastPage"
+                  (click)="goToPage(currentPage + 1)"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

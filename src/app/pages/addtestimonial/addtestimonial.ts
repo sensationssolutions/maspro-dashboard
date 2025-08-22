@@ -25,7 +25,8 @@ export class Addtestimonial {
   formData = {
     name: '',
     designation: '',
-    message: ''
+    message: '',
+    stars: 5
   };
 
   loading = false;
@@ -53,6 +54,10 @@ export class Addtestimonial {
     };
     reader.readAsDataURL(file);
   }
+}
+
+setRating(rating: number) {
+  this.formData.stars = rating;
 }
 
 
@@ -109,8 +114,9 @@ submitTestimonial() {
   data.append('name', this.formData.name.trim());
   data.append('designation', this.formData.designation.trim());
   data.append('message', this.formData.message.trim());
-  if (!this.selectedImage) {
-    missingFields.push('Image');
+  data.append('stars', this.formData.stars.toString());
+  if (this.selectedImage) {
+    data.append('image', this.selectedImage);
   }
 
 
@@ -119,7 +125,7 @@ submitTestimonial() {
       this.loading = false;
       this.showSuccess = true;
 
-      this.formData = { name: '', designation: '', message: '' };
+      this.formData = { name: '', designation: '', message: '', stars: 5 };
       this.selectedImage = null;
       this.imagePreview = null;
       this.resetFileInput();

@@ -49,7 +49,7 @@ export class Categories implements OnInit {
   deleteCategory(id: number) {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'This category and all its sub-categories will be deleted.',
+      text: 'This category and all its products will be deleted.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -83,5 +83,21 @@ export class Categories implements OnInit {
     if (page >= 1 && page <= this.lastPage) {
       this.fetchCategories(page);
     }
+  }
+
+  getImageUrl(imagePath: string): string {
+    // Remove any leading slash from imagePath to avoid double slashes
+    const cleanImagePath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
+    const url = environment.assetsUrl +  cleanImagePath;
+    console.log('Category Image URL:', url);
+    return url;
+  }
+
+  onImageError(event: any, image: any) {
+    console.error('Category image failed to load:', image, 'URL:', event.target.src);
+  }
+
+  onImageLoad(event: any, image: any) {
+    console.log('Category image loaded successfully:', image, 'URL:', event.target.src);
   }
 }

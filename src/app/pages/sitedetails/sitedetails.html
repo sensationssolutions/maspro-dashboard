@@ -61,7 +61,14 @@
 							<label class="form-label text-white">Logo</label>
 							<input type="file" class="form-control" id="file-logo" (change)="onImageSelected($event, 'logo')" accept="image/*" />
 							<div *ngIf="logoPreview" class="mt-2 position-relative d-inline-block">
-								<img [src]="logoPreview" alt="Logo" class="img-thumbnail" style="max-width: 200px;">
+								<img 
+									[src]="logoPreview" 
+									alt="Logo" 
+									class="img-thumbnail" 
+									style="max-width: 200px;"
+									(error)="onImageError($event, 'Logo')"
+									(load)="onImageLoad($event, 'Logo')"
+								>
 								<button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" style="transform: translate(50%, -50%)" (click)="removeImage('logo')">&times;</button>
 							</div>
 						</div>
@@ -71,7 +78,15 @@
 							<label class="form-label text-white">Favicon</label>
 							<input type="file" class="form-control" id="file-favicon" (change)="onImageSelected($event, 'favicon')" accept="image/*" />
 							<div *ngIf="faviconPreview" class="mt-2 position-relative d-inline-block">
-								<img [src]="faviconPreview" alt="Favicon" class="img-thumbnail" style="max-width: 200px;">
+								<img 
+									[src]="faviconPreview" 
+									alt="Favicon" 
+									class="img-thumbnail" 
+									style="max-width: 200px;"
+									(error)="onImageError($event, 'Favicon')"
+									(load)="onImageLoad($event, 'Favicon')"
+									onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgMTI1QzEwMCAxMTUuMDUyOCAxMDkuNDcxNyAxMDUgMTIwIDEwNUMxMzAuNTI4MyAxMDUgMTQwIDExNS4wNTI4IDE0MCAxMjVDMTQwIDEzNS41MjgzIDEzMC41MjgzIDE0NSAxMjAgMTQ1QzEwOS40NzE3IDE0NSAxMDAgMTM1LjUyODMgMTAwIDEyNVoiIGZpbGw9IiM5QjlCQTAiLz4KPHBhdGggZD0iTTEwMCAxMjVDMTAwIDExNS4wNTI4IDEwOS40NzE3IDEwNSAxMjAgMTA1QzEzMC41MjgzIDEwNSAxNDAgMTE1LjA1MjggMTQwIDEyNUMxNDAgMTM1LjUyODMgMTMwLjUyODMgMTQ1IDEyMCAxNDVDMTA5LjQ3MTcgMTQ1IDEwMCAxMzUuNTI4MyAxMDAgMTI1WiIgZmlsbD0iIzlCOUJBQCIvPgo8L3N2Zz4K'"
+								>
 								<button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" style="transform: translate(50%, -50%)" (click)="removeImage('favicon')">&times;</button>
 							</div>
 						</div>

@@ -54,6 +54,21 @@ export class Sitedetails implements OnInit, OnDestroy {
     this.editor.destroy();
   }
 
+  getImageUrl(imagePath: string): string {
+    // Remove any leading slash from imagePath to avoid double slashes
+    const cleanImagePath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
+    const url = environment.assetsUrl  + cleanImagePath;
+    console.log('Site Details Image URL:', url);
+    return url;
+  }
+
+  onImageError(event: any, imageType: string) {
+    console.error(`${imageType} image failed to load:`, event.target.src);
+  }
+
+  onImageLoad(event: any, imageType: string) {
+    console.log(`${imageType} image loaded successfully:`, event.target.src);
+  }
 
   loadSiteDetails() {
     this.http.get<any>(`${environment.apiUrl}/sitedetails`).subscribe({
@@ -66,8 +81,8 @@ export class Sitedetails implements OnInit, OnDestroy {
           this.formData.email = res.email || '';
           this.formData.address = res.address || '';
 
-          this.logoPreview = res.logo ? `${environment.assetsUrl}/${res.logo.replace('storage/', '')}` : null;
-          this.faviconPreview = res.favicon ? `${environment.assetsUrl}/${res.favicon.replace('storage/', '')}` : null;
+          this.logoPreview = res.logo ? this.getImageUrl(res.logo) : null;
+          this.faviconPreview = res.favicon ? this.getImageUrl(res.favicon) : null;
         }
       },
       error: (err) => {
