@@ -60,7 +60,7 @@
 											</td>
 											<td><strong>{{ product.name }}</strong></td>
 											<td>{{ product.category?.name || getCategoryName(product.category_id) }}</td>
-											<td>{{ product.description?.length > 50 ? (product.description | slice:0:50) + '...' : product.description }}</td>
+											<td [innerHTML]="product.description"></td>
 											<td>
 												<span class="badge" [ngClass]="product.status ? 'bg-success' : 'bg-secondary'">
 													{{ product.status ? 'Active' : 'Inactive' }}
